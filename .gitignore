@@ -1,0 +1,9 @@
+package-lock.json
+db.sqlite3
+node_modules/
+__pycache__/
+migrations/
+venv/
+settings.py
+keys.json
+static/frontend/kpapi.js
