@@ -1,12 +1,24 @@
 from django.http import JsonResponse
+from requests.api import get
 from .test_data.data_female import data_female
 from .test_data.data_male import data_male
 from . import urls
+from config.keys import keys
+import spotipy
+from spotipy.oauth2 import SpotifyClientCredentials
+import base64
 
-def index(request):
-    response = JsonResponse({"test":True})
-    response.status_code = 500
-    return response
+client_credentials_manager =\
+    SpotifyClientCredentials(client_id=keys['spotify_id'], client_secret=keys['spotify_secret'])
+sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
+
+
+def test_connection(request):
+    return JsonResponse({"test_connection":True})
+
+def artists(request):
+    
+    return JsonResponse({'user':''})
 
 def next_dataset(request):
 

@@ -7,3 +7,6 @@ venv/
 settings.py
 keys.json
 static/frontend/kpapi.js
+.cache
+launch.json
+keys.py
