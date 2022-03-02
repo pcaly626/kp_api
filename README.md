@@ -20,15 +20,15 @@ Reference [Django documentation](https://docs.djangoproject.com/en/4.0/intro/tut
 
 1. Install Django based on your OS ( either through the git repository or pip install django )
 
-    python -m pip install Django
+    `python -m pip install Django`
     
 2. Use Django Admin to start a project
 
-    django-admin startproject mysite
+    `django-admin startproject mysite`
     
 3. Start Server
 
-    python manage.py runserver
+    `python manage.py runserver`
 
 ## Lesson 2 - Creating a Django App
 ## Lesson 3 - Views
