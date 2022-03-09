@@ -10,3 +10,4 @@ static/frontend/kpapi.js
 .cache
 launch.json
 keys.py
+.idea

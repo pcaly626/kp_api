@@ -17,10 +17,34 @@ def test_connection(request):
     return JsonResponse({"test_connection":True})
 
 def artists(request):
-    
-    return JsonResponse({'user':''})
+    meta_data = {
+        'title':'Followers to Number of Genres',
+        'subtext':'Compare the amount of followers to the artists considered genre',
+        'legend':[],
+        'x':'NumOfGenres',
+        'y':'Followers',
+        'series': []
+        }
 
-def next_dataset(request):
+    sp.auth_manager = client_credentials_manager
+    response = sp.search(offset=0, type='artist', q="a")
+    followers = []
+    genres_count = []
+    artists = response.get('artists')
+
+    total = artists.get('total', 100)
+    items = artists.get('items', [])
+    for item in items:
+        num_of_genres = len(item['genres'])
+        followers.append({'name': num_of_genres, 'value': item['followers']['total']})
+        genres_count.append({'name': item['name'], 'value': num_of_genres})
+
+    return JsonResponse({'graph_meta_data':meta_data,
+                        'dataset_one': {"Set1": followers},
+                        'dataset_two': {}
+                        })
+
+def data_schema(request):
 
     # legend and series names need to match
     meta_data = {
