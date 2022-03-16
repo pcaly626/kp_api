@@ -2,6 +2,7 @@ from django.http import JsonResponse
 from .test_data.data_female import data_female
 from .test_data.data_male import data_male
 from . import urls
+from .models import SinaporeDistrict
 
 def index(request):
     response = JsonResponse({"test":True})
@@ -48,3 +49,8 @@ def list_functions(request):
         if str(url.pattern) not in ['', 'list']:
             endpoints.append({'name':str(url.pattern), 'href': f'api/{str(url.pattern)}'})
     return JsonResponse({'endpoints':endpoints})
+
+def one_district(request,id):
+    district = SinaporeDistrict.objects.get(id=id)
+    print(district)
+    return JsonResponse({'name':district.name,'population':district.population})
