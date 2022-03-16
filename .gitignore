@@ -6,4 +6,5 @@ migrations/
 venv/
 settings.py
 keys.json
+keys.py
 static/frontend/kpapi.js
