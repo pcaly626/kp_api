@@ -138,7 +138,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'backend',
-    'helloworld
+    'helloworld',
 ]`
 
 7. Add a basename for helloworld app for project
@@ -162,6 +162,98 @@ In a browser input the following address and a webpage with Hello World should r
 
 ## Lesson 4 - Models
 
+1. create a new app called `sinapore_districts`
+ 
+2. There will be a new app. Inside go to the `models.py` file and create this model,
 
+`class SinaporeDistrict(models.Model):
+    name = models.CharField(max_length=50)
+    year = models.CharField(max_length=4)
+    population = models.IntegerField()`
+
+3. Add a url and view
+
+These will be a placeholder for a future view in the next lesson.
+
+a. Here create a file called `urls.py` and add this content inside
+
+`
+from django.urls import path
+from . import views
+
+urlpatterns = [
+    path('', views.index)
+]
+`
+b. Create a index function to render the new html webpage
+
+`
+from django.shortcuts import render
+from django.http import JsonResponse
+
+# Create your views here.
+def index(request):
+    return JsonResponse({'test':True})
+`
+
+4. Add this app to the project like the last lesson 
+
+a. Install helloworld app to the django project
+
+In config/settings.py add an entry to the `INSTALLED_APPS` variable
+
+`
+INSTALLED_APPS = [
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'backend',
+    'helloworld',
+    'singapore_districts',
+]`
+
+b. Add a basename for helloworld app for project
+
+Navigate to config/urls.py and add a unique basename to the urlpatterns variable
+
+`
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('api/', include('backend.urls')),
+    path('hello/', include('helloword.urls')),
+    path('hello/', include('singapore_districts.urls')),
+]
+`
+5. Migrate the Model to the database
+
+Using Django's command line interface (CLI) there are 2 commands that will create the table in the database.
+
+`python manage.py makemigrations singapore_districts`
+
+This will prepare our model to be added to the database
+
+`python manage.py migrate singapore_districts`
+
+This will create the table in the database
+
+6. Check the table
+
+Django has a adminstrator page to handle database tables. First we need to create a superuser to access the table. 
+
+`python manage.py createsuperuser`
+
+Follow the prompts. Then navigate to the admin link. 
+
+`127.0.0.1:8000/admin`
+
+Type in the credientials for the superuser and view the Signapore District table 
+
+## Lesson 5 - Get Data from Views
+
+ - populate the database using a script 
+ - create a view that returns the data. 
 ## Lesson 5 - Connecting to a Exteranl API
 ## Lesson 6 - Rendering Data
