@@ -23,4 +23,5 @@ urlpatterns = [
     path('', include('apps.frontend.urls')),
     path('api/', include('apps.backend.urls')),
     path('hello/', include('apps.helloworld.urls')),
+    path('pop/', include('apps.districts_api.urls')),
 ]
