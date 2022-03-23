@@ -32,7 +32,7 @@ Pre-requisite before starting a new project create a virtual python environment.
 
     `python manage.py runserver`
     
-4. Open 127.0.0.1:8000 in a web browser to confirm Django started correctly
+4. Open `127.0.0.1:8000` in a web browser to confirm Django started correctly
 
 
 ## Lesson 2 - Creating a Django App
@@ -44,43 +44,44 @@ Pre-requisite before starting a new project create a virtual python environment.
 
 This generates several files to build the app. 
 
-`apps/
-    districts_api/
-        __init__.py
-        admin.py
-        apps.py
-        migrations/
+    apps/
+        districts_api/
             __init__.py
-        models.py
-        tests.py
-        urls.py
-        views.py
-`
+            admin.py
+            apps.py
+            migrations/
+                __init__.py
+            models.py
+            tests.py
+            urls.py
+            views.py
+
     
 2. Add new app to project in `settings.py`
 Inside the kp_api/settings.py file there is a variable called INSTALLED_APPS. This variable should already exist in settings.py. Here add the name of the new app. 
-`
-INSTALLED_APPS = [
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
-    'apps.districts_api'
-]`
+
+
+    INSTALLED_APPS = [
+        'django.contrib.admin',
+        'django.contrib.auth',
+        'django.contrib.contenttypes',
+        'django.contrib.sessions',
+        'django.contrib.messages',
+        'django.contrib.staticfiles',
+        'apps.districts_api'
+    ]
 
 3. Add app endpoint to project's `urls.py`
 
 kp_api/urls.py contains the paths to other apps avaliable from the web browser. Add a path to the urlpatterns:
 
-from django.contrib import admin
-from django.urls import include, path
+    from django.contrib import admin
+    from django.urls import include, path
 
-`urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('api/', include('apps.districts_api.urls')),
-]`
+    urlpatterns = [
+        path('admin/', admin.site.urls),
+        path('api/', include('apps.districts_api.urls')),
+    ]
 
 ## Lesson 3 - Views
 
@@ -90,64 +91,86 @@ Create a Hello World App.
 
 `python ../manage.py startapp helloworld`
 
+    apps/
+        districts_api/
+            __init__.py
+            admin.py
+            apps.py
+            migrations/
+                __init__.py
+            models.py
+            tests.py
+            urls.py
+            views.py
+        helloworld/
+            __init__.py
+            admin.py
+            apps.py
+            migrations/
+                __init__.py
+            models.py
+            tests.py
+            urls.py
+            views.py
+
 2. There will be a new directory called `helloworld`
 
 3. Here create a file called `urls.py` and add this content inside
 
-`
-from django.urls import path
-from . import views
 
-urlpatterns = [
-    path('', views.index)
-]
-`
+    from django.urls import path
+    from . import views
+    
+    urlpatterns = [
+        path('', views.index)
+    ]
+
 
 4. Now create the html file. 
 
-`
-mkdir templates
-mkdir templates/helloworld
-touch templates/helloworld/index.html
-`
+
+    mkdir templates
+    mkdir templates/helloworld
+    touch templates/helloworld/index.html
+
 add HTML the index.hmtl and save.
 
-5. Create a index function to render the new html webpage
+5. Create an index function to render the new html webpage
 
-`
-from django.shortcuts import render
 
-def index(request):
-    return render(request, 'helloworld/index.html')
-`
+    from django.shortcuts import render
+    
+    def index(request):
+        return render(request, 'helloworld/index.html')
+
 
 6. Install helloworld app to the django project
 
 In config/settings.py add an entry to the `INSTALLED_APPS` variable
 
-`
-INSTALLED_APPS = [
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
-    'apps.districts_api',
-    'apps.helloworld',
-]`
+
+    INSTALLED_APPS = [
+        'django.contrib.admin',
+        'django.contrib.auth',
+        'django.contrib.contenttypes',
+        'django.contrib.sessions',
+        'django.contrib.messages',
+        'django.contrib.staticfiles',
+        'apps.districts_api',
+        'apps.helloworld',
+    ]
 
 7. Add a basename for helloworld app for project
 
 Navigate to config/urls.py and add a unique basename to the urlpatterns variable
 
-`
-urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('api/', include('apps.districts_api.urls')),
-    path('hello/', include('apps.helloword.urls')),
-]
-`
+
+    urlpatterns = [
+        path('admin/', admin.site.urls),
+        path('api/', include('apps.districts_api.urls')),
+        path('hello/', include('apps.helloword.urls')),
+    ]
+
 
 8. Try it out!
 
@@ -160,10 +183,11 @@ In a browser input the following address and a webpage with Hello World should r
 
 1. Go inside the backend app to the `models.py` file and add this code,
 
-`class SinaporeDistrict(models.Model):
-    name = models.CharField(max_length=50)
-    year = models.CharField(max_length=4)
-    population = models.IntegerField()`
+
+    class SinaporeDistrict(models.Model):
+        name = models.CharField(max_length=50)
+        year = models.CharField(max_length=4)
+        population = models.IntegerField()
 
 3. Add a url and view
 
@@ -171,23 +195,23 @@ These will be a placeholder for a future view in the next lesson.
 
 a. Here create a file called `urls.py` and add this content inside
 
-`
-from django.urls import path
-from . import views
 
-urlpatterns = [
-    path('', views.index)
-]
-`
-b. Create a index function to render the new html webpage
+    from django.urls import path
+    from . import views
+    
+    urlpatterns = [
+        path('', views.index)
+    ]
 
-`
-from django.shortcuts import render
-from django.http import JsonResponse
+b. Create an index function to render the new html webpage
 
-def index(request):
-    return JsonResponse({'test':True})
-`
+
+    from django.shortcuts import render
+    from django.http import JsonResponse
+    
+    def index(request):
+        return JsonResponse({'test':True})
+
 
 4. Migrate the Model to the database
 
@@ -203,7 +227,7 @@ This will create the table in the database
 
 5. Check the table
 
-Django has a adminstrator page to handle database tables. First we need to create a superuser to access the table. 
+Django has a administrator page to handle database tables. First we need to create a superuser to access the table. 
 
 `python manage.py createsuperuser`
 
@@ -211,7 +235,7 @@ Follow the prompts. Then navigate to the admin link.
 
 `127.0.0.1:8000/admin`
 
-Type in the credientials for the superuser and view the Signapore District table 
+Type in the credentials for the superuser and view the Singapore District table 
 
 ## Lesson 5 - Get Data from Views
 
@@ -219,6 +243,7 @@ Now that the model is created there needs to be data added.
 
 1. Using a population script.
 Sample data will be located in the root directory. In the *root* of the directory create `populate_districts.py` then add this to the contents.
+
 
     import os
 
@@ -278,5 +303,6 @@ The url for district_api will take a parameter for the id of a model.
 
 `127.0.0.1:8000/api/<id>` an example `127.0.0.1:8000/api/1`
 
-## Lesson 6 - Connecting to a Exteranl API
-## Lesson 7 - Rendering Data
+## Lesson 6 - Rendering Data
+## Lesson 7 - Connecting to an External API
+
