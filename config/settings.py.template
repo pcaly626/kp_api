@@ -40,8 +40,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'corsheaders',
     'apps.frontend',
-    'apps.backend'
+    'apps.backend',
+    'apps.helloworld',
+    'apps.districts_api'
 ]
 
 MIDDLEWARE = [
@@ -52,6 +55,17 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
+]
+
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:8000",
+    "http://127.0.0.1:8000",
+]
+
+CORS_ALLOW_METHODS = [
+'GET',
 ]
 
 ROOT_URLCONF = 'config.urls'
@@ -81,7 +95,7 @@ WSGI_APPLICATION = 'config.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME': os.path.join(BASE_DIR,'db.sqlite3'),
     }
 }
 
@@ -124,5 +138,6 @@ USE_TZ = True
 MEDIA_ROOT = '/media/'
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
-    ('frontend', os.path.join(BASE_DIR, 'static', 'frontend'))
+    ('frontend', os.path.join(BASE_DIR, 'static', 'frontend')),
+    ('helloworld', os.path.join(BASE_DIR, 'static', 'helloworld'))
 ]

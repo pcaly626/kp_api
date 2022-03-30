@@ -9,5 +9,8 @@ keys.json
 static/frontend/kpapi.js
 .cache
 launch.json
-keys.py
 .idea
+keys.py
+../.idea/
+.idea/
+static/frontend/kpapi.js
